@@ -16,6 +16,7 @@ html, body {
 #root {
   display: flex;
   justify-content: center;
+  overflow-x: hidden;
 }
 
 table, th, td {

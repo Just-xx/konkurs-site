@@ -1,19 +1,13 @@
-import React from 'react'
-import { useContext } from 'react';
-import { CSVDataContext } from '../context/CSVDataContext';
-import { useLocalStorage } from '../hooks/useLocalStorage';
+import React from "react";
+import PresentationTable from "../components/PresentationTable/PresentationTable";
+import HeroLogo from "../components/HeroLogo/HeroLogo";
+
 
 export default function Presentation() {
-
-  const { CSVData, setCSVData } = useContext(CSVDataContext);
-
   return (
-    <div>
-        <table>
-          <tbody>
-            {CSVData && CSVData.map(line => <tr key={line}>{line.map(item => <td key={item}>{item}</td>)}</tr>)}
-          </tbody>
-        </table>
-      </div>
-  )
+    <>
+      <HeroLogo />
+      <PresentationTable />
+    </>
+  );
 }

@@ -22,7 +22,12 @@
   font-size: 1.075rem;
   font-weight: 600;
   color: rgba(0, 0, 0, 0.8);
-  height: 59px
+  height: 59px;
+  transition: background-color 40ms linear;
+}
+
+.row:hover {
+  background-color: #dadada;
 }
 
 .row .item {
@@ -40,4 +45,8 @@
   font-weight: 500;
   color: rgba(0, 0, 0, 0.5);
   height: auto;
+}
+
+.head-row:hover {
+  background-color: transparent;
 }

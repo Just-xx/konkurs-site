@@ -1,0 +1,19 @@
+
+.hero-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin: 48px 0;
+}
+
+.hero-logo-img {
+  height: 200px;
+}
+
+.hero-logo-text {
+  font-size: 3.5rem;
+  font-weight: 500;
+  line-height: 150%;
+
+}

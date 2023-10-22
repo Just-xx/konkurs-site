@@ -22,16 +22,20 @@
   display: inline-block;
   margin-right: 16px;
   justify-self: right;
-  color: #000;
+  color: var(--primary);
   opacity: 0;
   transform: scale(.8);
   transition: opacity 80ms linear, transition 80ms linear;
 }
 
 .row:hover i {
-  opacity: .5;
+  opacity: .8;
   transform: scale(1);
   cursor: pointer;
+}
+
+.row i:hover {
+  opacity: 1;
 }
 
 .item-text.place, .item-text.place:hover {
@@ -43,6 +47,7 @@
 .item-text {
   border-radius: 3px;
   cursor: pointer;
+  transition: background-color 40ms linear, box-shadow 40ms linear;
 }
 
 .item-text:hover {

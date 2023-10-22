@@ -1,0 +1,29 @@
+.p-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
+  background-color: #efefef;
+  padding: 24px 0;
+  border-radius: 10px;
+}
+
+.p-row-item {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.p-table {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.p-table-head {
+  background-color: transparent;
+  padding: 0;
+}
+
+.p-head-item {
+  font-size: 1.35rem;
+  font-weight: 500;
+}
