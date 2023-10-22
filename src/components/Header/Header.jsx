@@ -16,7 +16,7 @@ export default function Header() {
     <header>
       <Logo />
       <nav>
-        <a className='navlink' href="prezentacja" target='__blank'><span>Przejdź do wyników</span><i className="fa-solid fa-up-right-from-square"></i></a>
+        <Link className='navlink' to="prezentacja" target='__blank' rel="noopener noreferrer"><span>Przejdź do wyników</span><i className="fa-solid fa-up-right-from-square"></i></Link>
         <button onClick={() => fileDownload(CSVData)} className="navlink">Eksportuj wyniki</button>
         <Button fileInput onChange={e => handleCSVFile(e, setCSVData)}>Załaduj z pliku</Button>
       </nav>
