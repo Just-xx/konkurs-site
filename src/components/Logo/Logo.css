@@ -1,0 +1,22 @@
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: default;
+  user-select: none;
+  transition: transform 400ms cubic-bezier(.47,1.64,.41,.8);
+}
+
+.logo:hover {
+  transform: scale(1.1);
+}
+
+.logo-img  {
+  height: 50px;
+}
+
+.logo-text {
+  font-size: .7rem;
+  font-weight: 600;
+  color: var(--primary);
+}

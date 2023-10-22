@@ -1,0 +1,43 @@
+.result-wrapper {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 40px;
+  align-items: center;
+  justify-items: start;
+  background-color: #E2E2E2;
+  padding: 6px 0;
+  border-radius: 10px;
+  font-size: 1.075rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.8);
+  height: 59px
+}
+
+.row .item {
+  margin-left: 16px;
+}
+
+.place {
+  cursor: default;
+}
+
+.head-row {
+  background: transparent;
+  padding: 0;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.5);
+  height: auto;
+}

@@ -1,0 +1,51 @@
+.item-input {
+  padding: 6px 6px;
+  font-size: 1rem;
+  border-radius: 5px;
+  font-weight: 500;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  height: 30px;
+  width: 10px;
+  opacity: 0;
+  transform: scale(0.5);
+  width: 100px;
+  transition: all 80ms linear;
+}
+
+.item-input:focus {
+  transform: scale(1);
+  opacity: 1;
+  outline: 1px solid rgba(0, 0, 0, 0.2)
+}
+
+.row i {
+  display: inline-block;
+  margin-right: 16px;
+  justify-self: right;
+  color: #000;
+  opacity: 0;
+  transform: scale(.8);
+  transition: opacity 80ms linear, transition 80ms linear;
+}
+
+.row:hover i {
+  opacity: .5;
+  transform: scale(1);
+  cursor: pointer;
+}
+
+.item-text.place, .item-text.place:hover {
+  cursor: default;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.item-text {
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.item-text:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 0px 6px rgba(0, 0, 0, 0.1);
+}
