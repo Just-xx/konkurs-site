@@ -9,5 +9,10 @@ export default defineConfig({
       usePolling: true,
     },
   },
-  external: ["react", "react-router", "react-router-dom"]
+  external: ["react", "react-router", "react-router-dom"],
+  output: {
+    globals: {
+      react: "React",
+    },
+  }
 });
