@@ -50,3 +50,9 @@
 .head-row:hover {
   background-color: transparent;
 }
+
+.no-results {
+  font-size: 1.075rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.5);
+}

@@ -30,9 +30,9 @@ export default function PresentationTable() {
               <motion.div
                 className="p-row"
                 key={line[0]}
-                initial={{ opacity: 0, translateX: "-200px" }}
-                animate={{ opacity: 1, translateX: 0 }}
-                exit={{ opacity: 0, translateX: "500px" }}
+                initial={{ opacity: 0, translateY: "-20px" }}
+                animate={{ opacity: 1, translateY: 0 }}
+                exit={{ opacity: 0, translateY: "20px" }}
                 transition={{ ease: "easeOut" }}
               >
                 {line.map(

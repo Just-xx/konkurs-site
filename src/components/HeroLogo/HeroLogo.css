@@ -5,15 +5,19 @@
   justify-content: center;
   gap: 24px;
   margin: 48px 0;
+  user-select: none;
 }
 
 .hero-logo-img {
   height: 200px;
+  border-radius: 20px;
+  opacity: .9;
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.10), 1px 2px 4px 0px rgba(0, 0, 0, 0.05);
 }
 
 .hero-logo-text {
   font-size: 3.5rem;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 150%;
-
+  text-shadow: 1px 0px 6px rgba(0, 0, 0, 0.4);
 }

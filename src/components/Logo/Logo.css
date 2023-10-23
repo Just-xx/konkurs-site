@@ -7,12 +7,19 @@
   transition: transform 400ms cubic-bezier(.47,1.64,.41,.8);
 }
 
+
+.logo-img  {
+  height: 50px;
+  border-radius: 8px;
+  opacity: .8;
+}
+
 .logo:hover {
   transform: scale(1.1);
 }
 
-.logo-img  {
-  height: 50px;
+.logo:hover .logo-img {
+  opacity: 1;
 }
 
 .logo-text {

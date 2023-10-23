@@ -13,14 +13,20 @@ export default function ResultCard() {
     <Card>
       <div className="result-wrapper">
         <h1>Wyniki</h1>
-        <div className="results">
-          <div className="row head-row">
-            <span>Miejsce</span>
-            <span>Punkty</span>
-            <span>Klasa</span>
+        {(CSVData || CSVData?.length < 1)  ? (
+          <div className="results">
+            <div className="row head-row">
+              <span>Miejsce</span>
+              <span>Punkty</span>
+              <span>Klasa</span>
+            </div>
+            {CSVData && CSVData.map(line => <ResultRow line={line} key={line[0]} />)}
           </div>
-          {CSVData && CSVData.map(line => <ResultRow line={line} key={line[0]} />)}
-        </div>
+          ) : (
+            <div className='no-results'>brak wyników, zaimportuj z pliku lub dodaj nowy wynik</div>
+          )
+          
+          }
       </div>
     </Card>
   )

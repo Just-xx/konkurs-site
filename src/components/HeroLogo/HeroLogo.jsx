@@ -1,6 +1,6 @@
 import React from 'react'
 import './HeroLogo.css'
-import logo from "../../assets/logo.jpg"
+import logo from "../../assets/logo2.png"
 
 export default function HeroLogo() {
   return (

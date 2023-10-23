@@ -9,6 +9,10 @@ html, body {
   font-size: 14px;
 }
 
+body, #root {
+  background-color: #fff;
+}
+
 :root {
   --primary: #E54343;
 }
@@ -17,6 +21,7 @@ html, body {
   display: flex;
   justify-content: center;
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 table, th, td {
