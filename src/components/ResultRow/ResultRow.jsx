@@ -5,7 +5,6 @@ import { useState } from "react";
 import { useRef } from "react";
 import { useEffect } from "react";
 
-
 export default function ResultRow({ line }) {
   const scoreRef = useRef();
   const classRef = useRef();
@@ -56,69 +55,56 @@ export default function ResultRow({ line }) {
   };
 
   return (
-    <div className="row" data-line-id={line[0]} key={line[0]}>
-      {line.map((item, index) => {
-        if (index === 0) return;
-        return (
-          <React.Fragment key={item}>
-            {item === line[2] && (
-              <span onClick={handleClick} className="item">
-                {scoreEdit ? (
-                  <input
-                    className="item-input "
-                    data-item-type="score"
-                    onBlur={handleSubmitScore}
-                    onKeyDown={(e) => onKeyEnter(e, handleSubmitScore)}
-                    ref={scoreRef}
-                    type="text"
-                    name="item-input"
-                    id="item-input"
-                    />
-                    ) : (
-                      <span
-                      className="item-text"
-                      data-item-type="score"
-                      ref={scoreTextRef}
-                      title="Kliknij by edytować"
-                  >
-                    {item}
-                  </span>
-                )}
-              </span>
-            )}
-            {item === line[3] && (
-              <span onClick={handleClick} className="item">
-                {classEdit ? (
-                  <input
-                    className="item-input"
-                    data-item-type="class"
-                    onBlur={handleSubmitClass}
-                    onKeyDown={(e) => onKeyEnter(e, handleSubmitClass)}
-                    ref={classRef}
-                    type="text"
-                    name="item-input"
-                    id="item-input"
-                  />
-                ) : (
-                  <span
-                    className="item-text"
-                    data-item-type="class"
-                    ref={classTextRef}
-                    title="Kliknij by edytować"
-                  >
-                    {item}
-                  </span>
-                )}
-              </span>
-            )}
-            {item !== line[2] && item !== line[3] && (
-              <span onClick={handleClick} className="item">
-                <span className="item-text place">{item}</span>
-              </span>
-            )}
-          </React.Fragment>
-        );
-      })}
+    <div className="row" data-line-id={line[0]}>
+      <span className="item">
+        <span className="item-text place">{line[1]}</span>
+      </span>
+      <span onClick={handleClick} className="item">
+        {scoreEdit ? (
+          <input
+            className="item-input "
+            data-item-type="score"
+            onBlur={handleSubmitScore}
+            onKeyDown={(e) => onKeyEnter(e, handleSubmitScore)}
+            ref={scoreRef}
+            type="text"
+            name="item-input"
+            id="item-input"
+          />
+        ) : (
+          <span
+            className="item-text"
+            data-item-type="score"
+            ref={scoreTextRef}
+            title="Kliknij by edytować"
+          >
+            {line[2]}
+          </span>
+        )}
+      </span>
+      <span onClick={handleClick} className="item">
+        {classEdit ? (
+          <input
+            className="item-input"
+            data-item-type="class"
+            onBlur={handleSubmitClass}
+            onKeyDown={(e) => onKeyEnter(e, handleSubmitClass)}
+            ref={classRef}
+            type="text"
+            name="item-input"
+            id="item-input"
+          />
+        ) : (
+          <span
+            className="item-text"
+            data-item-type="class"
+            ref={classTextRef}
+            title="Kliknij by edytować"
+          >
+            {line[3]}
+          </span>
+        )}
+      </span>
       <i
         onClick={handleDelete}
         data-line-id={line[0]}

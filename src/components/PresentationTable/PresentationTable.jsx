@@ -18,7 +18,7 @@ export default function PresentationTable() {
 
   return (
     <div className="p-table">
-      {CSVData && CSVData.length ? (
+      {CSVData?.length ? (
         <>
           <div className="p-row p-table-head">
             <div className="p-head-item">Miejsce</div>
@@ -35,14 +35,13 @@ export default function PresentationTable() {
                 exit={{ opacity: 0, translateY: "20px" }}
                 transition={{ ease: "easeOut" }}
               >
-                {line.map(
-                  (item, i) =>
-                    i !== 0 && (
-                      <span className="p-row-item" key={item}>
-                        {item}
-                      </span>
-                    )
-                )}
+                <span className="p-row-item">
+                  {line[1]}
+                </span><span className="p-row-item">
+                  {line[2]}
+                </span><span className="p-row-item">
+                  {line[3]}
+                </span>
               </motion.div>
             ))}
           </AnimatePresence>

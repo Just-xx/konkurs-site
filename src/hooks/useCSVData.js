@@ -23,8 +23,9 @@ export const useCSVData = () => {
   };
 
   const addResult = (score, className) => {
-    if (CSVData) {
+    if (CSVData?.length) {
       const id = Math.max(...CSVData.map((line) => parseInt(line[0]))) + 1;
+      console.log("ID: " + id)
       setCSVData(
         CSVData.concat([
           [String(id), String(0), String(score), String(className)],
