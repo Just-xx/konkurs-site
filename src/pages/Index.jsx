@@ -9,6 +9,7 @@ export default function Index() {
       <Header />
       <ResultAdditionCard />
       <ResultCard />
+      Uwaga strona nie jest jeszcze dopracowana, mogą pojawiać się błędy. Pozdrawiam.
     </>
   );
 }
