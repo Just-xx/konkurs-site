@@ -1,9 +1,9 @@
 import React from 'react';
 import Card from '../Card/Card';
 import './ResultAdditionCard.css';
-import Button from '../Button/Button'
-import logo from '../../assets/logo.jpg'
-import { useCSVData } from '../../hooks/useCSVData';
+import Button from '../../Button/Button'
+import logo from '../../../assets/logo3.png'
+import { useCSVData } from '../../../hooks/useCSVData';
 import { useRef } from 'react';
 
 export default function ResultAdditionCard() {

@@ -1,0 +1,27 @@
+.result-addition-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+
+
+.bg-logo {
+  position: absolute;
+  opacity: .2;
+  height: 300px;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  user-select: none;
+}
+
+@media screen and (max-width: 1024px) {
+  .bg-logo {
+    display: none;
+  }
+
+  form {
+    width: 100%;
+  }
+}

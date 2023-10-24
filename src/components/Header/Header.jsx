@@ -1,6 +1,6 @@
 import React from 'react'
 import './Header.css'
-import Logo from '../Logo/Logo'
+import Logo from '../Logos/Logo/Logo'
 import Button from '../Button/Button'
 import { handleCSVFile } from '../../utils/handleCSVFile'
 import { useContext } from 'react'

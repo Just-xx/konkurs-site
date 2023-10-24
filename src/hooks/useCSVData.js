@@ -10,6 +10,7 @@ export const useCSVData = () => {
     CSVData.forEach((line, index) => {
       if (line[0] === String(id)) {
         pointer = index;
+        console.log(`${line[0]} => ${index} => ${pointer}`)
       }
     });
 
@@ -25,15 +26,18 @@ export const useCSVData = () => {
   const addResult = (score, className) => {
     if (CSVData?.length) {
       const id = Math.max(...CSVData.map((line) => parseInt(line[0]))) + 1;
-      console.log("ID: " + id)
-      setCSVData(
-        CSVData.concat([
-          [String(id), String(0), String(score), String(className)],
-        ])
-      );
-    } else {
-      setCSVData([[String(0), String(0), String(score), String(className)]]);
+      if (id !== NaN) {
+        setCSVData(
+          CSVData.concat([
+            [String(id), String(0), String(score), String(className)],
+          ])
+        );
+        console.log(id)
+        return;
+      }
     }
+
+    setCSVData([[String(0), String(0), String(score), String(className)]]);
   };
 
   const editResult = (id, score, className) => {

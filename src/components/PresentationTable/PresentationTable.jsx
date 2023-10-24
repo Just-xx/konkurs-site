@@ -5,15 +5,16 @@ import { CSVDataContext } from "../../context/CSVDataContext";
 import { useEffect } from "react";
 import { parseCSV } from "../../utils/parseCSV";
 import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
+import { useConfig } from "../../hooks/useConifg";
 
 export default function PresentationTable() {
   const { CSVData, setCSVData } = useContext(CSVDataContext);
 
   useEffect(() => {
-    setInterval(
-      () => setCSVData(parseCSV(localStorage.getItem("CSVData"))),
-      100
-    );
+    setInterval(() => {
+      setCSVData(parseCSV(localStorage.getItem("CSVData")));
+    }, 100);
   }, []);
 
   return (
@@ -35,13 +36,9 @@ export default function PresentationTable() {
                 exit={{ opacity: 0, translateY: "20px" }}
                 transition={{ ease: "easeOut" }}
               >
-                <span className="p-row-item">
-                  {line[1]}
-                </span><span className="p-row-item">
-                  {line[2]}
-                </span><span className="p-row-item">
-                  {line[3]}
-                </span>
+                <span className="p-row-item">{line[1]}</span>
+                <span className="p-row-item">{line[2]}</span>
+                <span className="p-row-item">{line[3]}</span>
               </motion.div>
             ))}
           </AnimatePresence>

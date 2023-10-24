@@ -1,0 +1,57 @@
+form {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  min-width: 260px;
+}
+
+form input[type="text"], select {
+  margin-bottom: 24px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 10px;
+  font-weight: 500;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+select {
+  appearance: none;
+}
+
+label {
+  margin-bottom: 12px;
+  font-size: 1.075rem;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+input[type="range"] {
+  margin-bottom: 24px;
+  appearance: none;
+  background-color: rgba(0, 0, 0, 0.15);
+  height: 6px;
+  border-radius: 4px;
+  opacity: .9;
+}
+
+input[type="range"]:hover {
+  opacity: 1;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--primary);
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: var(--primary);
+  cursor: pointer;
+  border-radius: 50%;
+}

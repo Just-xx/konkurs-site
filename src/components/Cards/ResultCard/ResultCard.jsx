@@ -1,9 +1,9 @@
 import React from 'react';
 import Card from '../Card/Card';
 import { useContext } from 'react';
-import { CSVDataContext } from '../../context/CSVDataContext';
+import { CSVDataContext } from '../../../context/CSVDataContext';
 import './ResultCard.css';
-import ResultRow from '../ResultRow/ResultRow';
+import ResultRow from './ResultRow/ResultRow';
 
 export default function ResultCard() {
 

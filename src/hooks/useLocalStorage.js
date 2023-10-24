@@ -9,13 +9,6 @@ function setCSVDataStorage(CSVData) {
 }
 
 function isCSVEqual(CSVData, CSVDataStorage) {
-  if (CSVData.length !== CSVDataStorage.length) return false;
-  if (
-    CSVData.filter(
-      (line, index) => line.length !== CSVDataStorage[index].length
-    ).length > 0
-  )
-    return false;
 
   const flatCSVDataStorage = CSVDataStorage.flat();
   if (
@@ -27,7 +20,7 @@ function isCSVEqual(CSVData, CSVDataStorage) {
   return true;
 }
 
-function sortResults(CSVData, setCSVData) {
+function sortResults(CSVData) {
   let CSVDataCopy = new Array(...CSVData);
   let place = 1;
 
@@ -39,8 +32,7 @@ function sortResults(CSVData, setCSVData) {
     return line;
   });
 
-  console.log(CSVDataCopy);
-  setCSVData(CSVDataCopy);
+  return CSVDataCopy;
 }
 
 export function useLocalStorage(setCSVData, CSVData) {
@@ -52,9 +44,12 @@ export function useLocalStorage(setCSVData, CSVData) {
 
   useEffect(() => {
     const CSVDataStorage = localStorage.getItem("CSVData");
+    
     if (CSVData && !isCSVEqual(CSVData, parseCSV(CSVDataStorage))) {
-      sortResults(CSVData, setCSVData);
-      setCSVDataStorage(CSVData);
+      const sortedCSVData = sortResults(CSVData);
+      setCSVData(sortedCSVData);
+      setCSVDataStorage(sortedCSVData);
+      console.log("state updated");
     }
   }, [CSVData]);
 }

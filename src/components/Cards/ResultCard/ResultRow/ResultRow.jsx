@@ -1,5 +1,5 @@
 import React from "react";
-import { useCSVData } from "../../hooks/useCSVData";
+import { useCSVData } from "../../../../hooks/useCSVData";
 import "./ResultRow.css";
 import { useState } from "react";
 import { useRef } from "react";
