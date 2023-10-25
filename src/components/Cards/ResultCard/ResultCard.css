@@ -56,3 +56,13 @@
   font-weight: 600;
   color: rgba(0, 0, 0, 0.5);
 }
+
+@media screen and (max-width: 635px) {
+  .row {
+    justify-items: center;
+  }
+
+  .row .item {
+    margin-left: 0px;
+  }
+}

@@ -13,7 +13,7 @@ export default function ResultCard() {
     <Card>
       <div className="result-wrapper">
         <h1>Wyniki</h1>
-        {(CSVData?.length !== 0)  ? (
+        {(CSVData !== undefined && CSVData?.length > 0) ? (
           <div className="results">
             <div className="row head-row">
               <span>Miejsce</span>

@@ -12,9 +12,12 @@ export default function PresentationTable() {
   const { CSVData, setCSVData } = useContext(CSVDataContext);
 
   useEffect(() => {
-    setInterval(() => {
+
+    const CSVFetchInterval = setInterval(() => {
       setCSVData(parseCSV(localStorage.getItem("CSVData")));
     }, 100);
+
+    return () => clearInterval(CSVFetchInterval)
   }, []);
 
   return (

@@ -1,0 +1,9 @@
+.author {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-size: .8rem;
+  font-weight: 500;
+  opacity: .4;
+  user-select: none;
+}

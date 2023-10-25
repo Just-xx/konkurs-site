@@ -13,9 +13,7 @@
 .hero-logo-img {
   height: 100%;
   object-fit: cover;
-  border-radius: 20px;
   opacity: .9;
-  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.10), 1px 2px 4px 0px rgba(0, 0, 0, 0.05);
 }
 
 .hero-logo-text {
@@ -26,6 +24,8 @@
   text-shadow: 1px 0px 6px rgba(0, 0, 0, 0.4);
 }
 
-.logo-1, .logo-3 {
+.logo-shadow {
   box-shadow: none;
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.10), 1px 2px 4px 0px rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
 }

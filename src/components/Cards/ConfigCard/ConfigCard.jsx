@@ -51,6 +51,7 @@ export default function ConfigCard() {
             <option value="logo1">logo #1</option>
             <option value="logo2">logo #2</option>
             <option value="logo3">logo #3</option>
+            <option value="logo4">logo #4</option>
           </select>
           <label htmlFor="scale-x">Rozciągnięcie</label>
           <input

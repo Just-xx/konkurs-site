@@ -55,7 +55,7 @@ export default function ResultRow({ line }) {
   };
 
   return (
-    <div className="row" data-line-id={line[0]}>
+    <div className="row" tabIndex="0" data-line-id={line[0]}>
       <span className="item">
         <span className="item-text place">{line[1]}</span>
       </span>

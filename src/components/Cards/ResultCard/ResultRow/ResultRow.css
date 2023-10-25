@@ -21,7 +21,7 @@
 .row i {
   display: inline-block;
   margin-right: 16px;
-  justify-self: right;
+  justify-self: end;
   color: var(--primary);
   opacity: 0;
   transform: scale(.8);

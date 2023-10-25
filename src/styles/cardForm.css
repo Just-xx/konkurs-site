@@ -118,3 +118,9 @@ input[type="checkbox"]:checked::after {
 .input-checkbox input[type="checkbox"]:checked ~ i {
   visibility: visible;
 }
+
+@media screen and (max-width: 430px) {
+  form {
+    min-width: auto;
+  }
+}

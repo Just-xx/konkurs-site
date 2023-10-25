@@ -2,7 +2,7 @@ import React from 'react';
 import Card from '../Card/Card';
 import './ResultAdditionCard.css';
 import Button from '../../Button/Button'
-import logo from '../../../assets/logo3.png'
+import logo from '../../../assets/logo4.png'
 import { useCSVData } from '../../../hooks/useCSVData';
 import { useRef } from 'react';
 
