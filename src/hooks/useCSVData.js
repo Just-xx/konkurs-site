@@ -32,7 +32,6 @@ export const useCSVData = () => {
             [String(id), String(0), String(score), String(className)],
           ])
         );
-        console.log(id)
         return;
       }
     }

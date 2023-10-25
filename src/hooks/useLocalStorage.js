@@ -9,15 +9,8 @@ function setCSVDataStorage(CSVData) {
 }
 
 function isCSVEqual(CSVData, CSVDataStorage) {
-
-  const flatCSVDataStorage = CSVDataStorage.flat();
-  if (
-    CSVData.flat().filter((item, index) => item !== flatCSVDataStorage[index])
-      .length > 0
-  )
-    return false;
-
-  return true;
+  if (JSON.stringify(CSVData) === JSON.stringify(CSVDataStorage)) return true;
+  return false;
 }
 
 function sortResults(CSVData) {
@@ -44,7 +37,7 @@ export function useLocalStorage(setCSVData, CSVData) {
 
   useEffect(() => {
     const CSVDataStorage = localStorage.getItem("CSVData");
-    
+
     if (CSVData && !isCSVEqual(CSVData, parseCSV(CSVDataStorage))) {
       const sortedCSVData = sortResults(CSVData);
       setCSVData(sortedCSVData);
