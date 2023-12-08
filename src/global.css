@@ -15,6 +15,7 @@ body, #root {
 
 :root {
   --primary: #E54343;
+  --warning: #d15c5c;
 }
 
 #root {

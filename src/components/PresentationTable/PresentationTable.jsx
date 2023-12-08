@@ -5,8 +5,6 @@ import { CSVDataContext } from "../../context/CSVDataContext";
 import { useEffect } from "react";
 import { parseCSV } from "../../utils/parseCSV";
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
-import { useConfig } from "../../hooks/useConifg";
 
 export default function PresentationTable() {
   const { CSVData, setCSVData } = useContext(CSVDataContext);

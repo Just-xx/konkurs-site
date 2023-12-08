@@ -4,7 +4,8 @@ import './ResultAdditionCard.css';
 import Button from '../../Button/Button'
 import logo from '../../../assets/logo4.png'
 import { useCSVData } from '../../../hooks/useCSVData';
-import { useRef } from 'react';
+import { useRef, useContext } from 'react';
+import { TLContext } from '../../../contexts/TLContext';
 
 export default function ResultAdditionCard() {
 
@@ -19,15 +20,20 @@ export default function ResultAdditionCard() {
   }
 
 
+  const tlHandler = useContext(TLContext);
+
+
   return (
     <Card>
       <div className="result-addition-wrapper">
         <h1>Dodaj nowy wynik</h1>
         <form>
-          <label htmlFor="class">Klasa</label>
-          <input type="text" id="class" ref={classInputRef} />
-          <label htmlFor="score">Punkty</label>
-          <input type="text" id="score" ref={scoreInputRef} />
+          {tlHandler.layout.map(field => (
+            <>
+              <label htmlFor={field}>{field}</label>
+              <input type="text" id={field} />
+            </>
+          ))}
           <Button onClick={handleResultAddition} secondary>Dodaj<i className="fa-solid fa-circle-plus"></i></Button>
         </form>
         <img draggable="false" src={logo} alt="" className='bg-logo' />

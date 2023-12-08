@@ -15,26 +15,30 @@ function isCSVEqual(CSVData, CSVDataStorage) {
 
 function sortResults(CSVData) {
   let CSVDataCopy = new Array(...CSVData);
-  let place = 1;
+  // let place = 1;
 
-  CSVDataCopy.sort((a, b) => b[2] - a[2]);
+  // CSVDataCopy.sort((a, b) => b[2] - a[2]);
 
-  CSVDataCopy = CSVDataCopy.map((line) => {
-    line[1] = String(place);
-    place++;
-    return line;
-  });
+  // CSVDataCopy = CSVDataCopy.map((line) => {
+  //   line[1] = String(place);
+  //   place++;
+  //   return line;
+  // });
 
   return CSVDataCopy;
 }
 
 export function useLocalStorage(setCSVData, CSVData) {
+
+  // fetch local storage
   useEffect(() => {
     const data = localStorage.getItem("CSVData");
     if (data) setCSVData(parseCSV(data));
-    else console.warn("NO LOCAL STORAGE TO LOAD FROM");
+    else console.info("No LS to load from, initializing new LS");
   }, []);
 
+
+  // update LS everytime state changes
   useEffect(() => {
     const CSVDataStorage = localStorage.getItem("CSVData");
 
@@ -42,7 +46,6 @@ export function useLocalStorage(setCSVData, CSVData) {
       const sortedCSVData = sortResults(CSVData);
       setCSVData(sortedCSVData);
       setCSVDataStorage(sortedCSVData);
-      console.log("state updated");
     }
   }, [CSVData]);
 }

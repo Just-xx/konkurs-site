@@ -7,7 +7,7 @@ export function fileDownload(content) {
 
   link.href = URL.createObjectURL(file);
 
-  link.download = "KONKURS_DATA.csv";
+  link.download = "TABLE_DATA.csv";
 
   link.click();
   URL.revokeObjectURL(link.href);

@@ -1,6 +1,24 @@
 import { useContext } from "react";
 import { CSVDataContext } from "../context/CSVDataContext";
 
+class CSVDataHandler {
+  
+  constructor() {
+    const { CSVData, setCSVData } = useContext(CSVDataContext);
+    this.CSVData = CSVData;
+    this.setCSVData = setCSVData;
+  }
+  
+  findId(id) {
+    return this.CSVData.findIndex(line => line[0] === String(id))
+  }
+
+  removeResult(id) {
+    this.setCSVData(this.CSVData.filter(l => l[0] !== String(id)))
+  }
+
+}
+
 export const useCSVData = () => {
   const { CSVData, setCSVData } = useContext(CSVDataContext);
 
@@ -24,6 +42,7 @@ export const useCSVData = () => {
   };
 
   const addResult = (score, className) => {
+    return;
     if (CSVData?.length) {
       const id = Math.max(...CSVData.map((line) => parseInt(line[0]))) + 1;
       if (id !== NaN) {
@@ -40,6 +59,8 @@ export const useCSVData = () => {
   };
 
   const editResult = (id, score, className) => {
+
+    return;
     const pointer = findId(id);
     setCSVData(
       CSVData.map((line, index) => {
