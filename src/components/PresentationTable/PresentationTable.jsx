@@ -1,50 +1,43 @@
 import React from "react";
 import "./PresentationTable.css";
 import { useContext } from "react";
-import { CSVDataContext } from "../../context/CSVDataContext";
 import { useEffect } from "react";
-import { parseCSV } from "../../utils/parseCSV";
-import { AnimatePresence, motion } from "framer-motion";
+import { TableContext } from "../../contexts/TableContext";
+import { TLContext } from "../../contexts/TLContext";
+
 
 export default function PresentationTable() {
-  const { CSVData, setCSVData } = useContext(CSVDataContext);
+
+
+  const table = useContext(TableContext);
+  const tlHandler = useContext(TLContext);
 
   useEffect(() => {
-
-    const CSVFetchInterval = setInterval(() => {
-      setCSVData(parseCSV(localStorage.getItem("CSVData")));
-    }, 100);
-
-    return () => clearInterval(CSVFetchInterval)
-  }, []);
+    const fetchInterval = table.getFetchInterval();
+    return () => clearInterval(fetchInterval); 
+  }, [])
 
   return (
-    <div className="p-table">
-      {CSVData?.length ? (
-        <>
-          <div className="p-row p-table-head">
-            <div className="p-head-item">Miejsce</div>
-            <div className="p-head-item">Punkty</div>
-            <div className="p-head-item">Klasa</div>
-          </div>
-          <AnimatePresence>
-            {CSVData.map((line) => (
-              <motion.div
-                className="p-row"
-                key={line[0]}
-                initial={{ opacity: 0, translateY: "-20px" }}
-                animate={{ opacity: 1, translateY: 0 }}
-                exit={{ opacity: 0, translateY: "20px" }}
-                transition={{ ease: "easeOut" }}
-              >
-                <span className="p-row-item">{line[1]}</span>
-                <span className="p-row-item">{line[2]}</span>
-                <span className="p-row-item">{line[3]}</span>
-              </motion.div>
+    <div className="p-table-wrapper">
+      <table className="p-table">
+        <thead>
+          <tr>
+            {table.tableLayout.map(field => (
+              <th key={field}>{field}</th>
             ))}
-          </AnimatePresence>
-        </>
-      ) : null}
+          </tr>
+        </thead>
+        <tbody>
+          {table.records.map((record, i) => (
+            <tr key={i}>
+              {table.getSortedRecordEntries(record).map(field => (
+                <td key={field[0]}>{field[1]}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
     </div>
   );
 }

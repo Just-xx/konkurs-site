@@ -1,9 +1,10 @@
-import { CSVDataContext } from './context/CSVDataContext';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Index from './pages/Index';
-import { useState } from 'react';
 import Presentation from './pages/Presentation';
-import { useLocalStorage } from './hooks/useLocalStorage';
+import { useTableLayout } from "./hooks/useTableLayout";
+import { TLContext } from "./contexts/TLContext";
+import { useTable } from "./hooks/useTable";
+import { TableContext } from "./contexts/TableContext";
 
 const router = createBrowserRouter([
   {
@@ -20,15 +21,17 @@ const router = createBrowserRouter([
 
 function App() {
 
-  const [CSVData, setCSVData] = useState(null);
-  useLocalStorage(setCSVData, CSVData);
+  const tlHandler = useTableLayout();
+  const tableH = useTable(tlHandler);
 
   return (
-    <CSVDataContext.Provider value={{CSVData, setCSVData}}>
       <div id="app-container">
-        <RouterProvider router={router}></RouterProvider>
+        <TLContext.Provider value={tlHandler}>
+          <TableContext.Provider value={tableH}>
+            <RouterProvider router={router} />
+          </TableContext.Provider>
+        </TLContext.Provider>
       </div>
-    </CSVDataContext.Provider>
   ) 
 }
 

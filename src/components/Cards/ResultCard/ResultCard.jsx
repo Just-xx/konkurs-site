@@ -1,33 +1,36 @@
-import React from 'react';
-import Card from '../Card/Card';
-import { useContext } from 'react';
-import { CSVDataContext } from '../../../context/CSVDataContext';
-import './ResultCard.css';
-import ResultRow from './ResultRow/ResultRow';
+import React from "react";
+import Card from "../Card/Card";
+import { useContext } from "react";
+import "./ResultCard.css";
+import { TableContext } from "../../../contexts/TableContext";
+import ResultRow from "./ResultRow/ResultRow";
+import { TLContext } from "../../../contexts/TLContext";
 
 export default function ResultCard() {
-
-  const { CSVData, setCSVData } = useContext(CSVDataContext)
+  const table = useContext(TableContext);
+  const tlHandler = useContext(TLContext)
 
   return (
-    <Card>
+    <Card inactive={!tlHandler.approved}>
       <div className="result-wrapper">
         <h1>Wyniki</h1>
-        {(CSVData !== undefined && CSVData?.length > 0) ? (
-          <div className="results">
-            <div className="row head-row">
-              <span>Miejsce</span>
-              <span>Punkty</span>
-              <span>Klasa</span>
-            </div>
-            {CSVData && CSVData.map(line => <ResultRow line={line} key={line[0]} />)}
-          </div>
-          ) : (
-            <div className='no-results'>brak wyników, zaimportuj z pliku lub dodaj nowy wynik</div>
-          )
-          
-          }
+        <div className="results">
+          <table className="table">
+            <thead>
+              <tr>
+                {table.tableLayout.map(field => (
+                  <th key={field}>{field}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {table.records.map((record, i) => (
+                <ResultRow key={i} i={i} record={record} />
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </Card>
-  )
+  );
 }

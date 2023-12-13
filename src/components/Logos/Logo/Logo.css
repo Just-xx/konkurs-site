@@ -5,6 +5,7 @@
   cursor: default;
   user-select: none;
   transition: transform 400ms cubic-bezier(.47,1.64,.41,.8);
+  visibility: hidden;
 }
 
 

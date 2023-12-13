@@ -8,53 +8,46 @@ class StateStorageHandler {
     this.LSname = LSname;
     this.initVal = initVal;
 
-    this.#checkInStorage();
+    this.#checkInStorageEffect();
     this.#updateLS();
   }
 
-  #checkInStorage() {
-    useEffect(() => {
-      const res = localStorage.getItem(this.LSname);
+  checkInStorage() {
+    const res = localStorage.getItem(this.LSname);
 
-      if (res) {
-        switch (typeof this.initVal) {
-          case "object":
-            this.#arrayAndObjectHandler(res);
-            break;
-          case "number":
-            this.setState(parseFloat(res));
-            break;
-          case "string":
-            this.setState(res);
-            break;
-          case "boolean":
-            this.setState(res === "true" ? true : false);
-            break;
-        }
-        return;
+    if (res) {
+      switch (typeof this.initVal) {
+        case "object":
+          this.setState(JSON.parse(res));
+          break;
+        case "number":
+          this.setState(parseFloat(res));
+          break;
+        case "string":
+          this.setState(JSON.parse(res));
+          break;
+        case "boolean":
+          this.setState(res === "true" ? true : false);
+          break;
       }
+      return;
+    }
 
-      this.setState(this.initVal);
-
-    }, []);
+    this.setState(this.initVal);
   }
 
-  #arrayAndObjectHandler(res) {
-    if (Array.isArray(this.initVal)) {
-      this.setState(res.split(","));
-    } else {
-      this.setState(JSON.parse(res));
-    }
+  #checkInStorageEffect() {
+    useEffect(this.checkInStorage.bind(this), []);
   }
 
   #updateLS() {
     useEffect(() => {
-      localStorage.setItem(this.LSname, String(this.state));
+      localStorage.setItem(this.LSname, JSON.stringify(this.state));
     }, [this.state]);
   }
 }
 
 export function useStateStorage(LSname, initVal) {
   const stateStorageHandler = new StateStorageHandler(LSname, initVal);
-  return [stateStorageHandler.state, stateStorageHandler.setState];
+  return [stateStorageHandler.state, stateStorageHandler.setState, stateStorageHandler.checkInStorage.bind(stateStorageHandler)];
 }

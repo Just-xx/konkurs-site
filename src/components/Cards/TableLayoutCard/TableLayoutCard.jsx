@@ -1,13 +1,14 @@
 import React, { useContext, useState } from "react";
 import "./TableLayoutCard.css";
 import Card from "../Card/Card";
-import Button from '../../Button/Button'
+import Button from "../../Button/Button";
 import { TLContext } from "../../../contexts/TLContext";
+import { TableContext } from "../../../contexts/TableContext";
 
 export default function TableLayoutCard() {
-
   const tlHandler = useContext(TLContext);
-  
+  const table = useContext(TableContext);
+
   const [editing, setEditing] = useState(false);
   const [maxColReached, setMaxReached] = useState(false);
 
@@ -24,13 +25,27 @@ export default function TableLayoutCard() {
     tlHandler.deleteColumn(e.target.dataset.index);
   }
 
+  function disapprove() {
+    tlHandler.disapprove();
+    table.clear();
+  }
+
   return (
     <Card>
       <h1>{tlHandler.approved ? "Układ tabeli" : "Stwórz układ tebeli"}</h1>
-      <div className={`tl-config-wrapper ${tlHandler.approved ? "tl-config-wrapper--approved" : ''}`}>
+      <div
+        className={`tl-config-wrapper ${
+          tlHandler.approved ? "tl-config-wrapper--approved" : ""
+        }`}
+      >
         <div className="tl-wrapper">
           {tlHandler.layout.map((colName, i) => (
-            <div className={`tl-wrapper__item ${tlHandler.approved ? "tl-wrapper__item--approved" : ''}`} key={i}>
+            <div
+              className={`tl-wrapper__item ${
+                tlHandler.approved ? "tl-wrapper__item--approved" : ""
+              }`}
+              key={i}
+            >
               <input
                 onClick={() => setEditing(true)}
                 onBlur={() => setEditing(false)}
@@ -59,7 +74,27 @@ export default function TableLayoutCard() {
           </button>
         )}
       </div>
-      <Button secondary allWidth center onClick={() => tlHandler.approved ? tlHandler.disapprove() : tlHandler.approve()}>{tlHandler.approved ? "Zmień układ" : "Zatwierdź układ"}</Button>
+      <Button
+        secondary
+        allWidth
+        center
+        onClick={() =>
+          tlHandler.approved ? disapprove() : tlHandler.approve()
+        }
+      >
+        {tlHandler.approved ? (
+          <>
+            Zmień układ
+            <span style={{ opacity: 0.4 }}>
+              (UWAGA: spowoduje usunięcie danych z tabeli)
+            </span>
+          </>
+        ) : (
+          <>
+            Zatwierdź układ
+          </>
+        )}
+      </Button>
     </Card>
   );
 }

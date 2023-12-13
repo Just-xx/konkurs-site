@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useStateStorage } from "./useStateStorage";
 
-const DEFAULT_LAYOUT = ["Miejsce", "Punkty", "Klasa"]
+export const DEFAULT_LAYOUT = ["Miejsce", "Punkty", "Klasa"]
 
 class TableLayoutHandler {
   constructor() {
