@@ -5,6 +5,7 @@ import { useTableLayout } from "./hooks/useTableLayout";
 import { TLContext } from "./contexts/TLContext";
 import { useTable } from "./hooks/useTable";
 import { TableContext } from "./contexts/TableContext";
+import "./styles/utils.css"
 
 const router = createBrowserRouter([
   {

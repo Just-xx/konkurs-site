@@ -1,7 +1,7 @@
 form {
   display: flex;
   flex-direction: column;
-  width: 30%;
+  width: 100%;
   min-width: 260px;
 }
 
@@ -56,6 +56,12 @@ input[type="range"]::-moz-range-thumb {
   display: flex;
   align-items: center;
   margin-bottom: 24px;
+}
+
+.checkbox.checkbox--disabled {
+  cursor: default;
+  pointer-events: none;
+  opacity: .5;
 }
 
 .checkbox, .checkbox * {
@@ -118,6 +124,7 @@ input[type="checkbox"]:checked::after {
 .input-checkbox input[type="checkbox"]:checked ~ i {
   visibility: visible;
 }
+
 
 @media screen and (max-width: 430px) {
   form {

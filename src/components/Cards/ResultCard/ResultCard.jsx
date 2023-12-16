@@ -19,7 +19,7 @@ export default function ResultCard() {
             <thead>
               <tr>
                 {table.tableLayout.map(field => (
-                  <th key={field}>{field}</th>
+                  <th key={field} className={`${(table.autoPlace && field === "Miejsce") ? "special-field" : ""}`}>{field}</th>
                 ))}
               </tr>
             </thead>

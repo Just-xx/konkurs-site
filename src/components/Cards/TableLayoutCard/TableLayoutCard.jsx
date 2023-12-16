@@ -13,7 +13,7 @@ export default function TableLayoutCard() {
   const [maxColReached, setMaxReached] = useState(false);
 
   function handleAdd() {
-    setMaxReached(!tlHandler.addColumn("Nazwa"));
+    setMaxReached(!tlHandler.addColumn(`Nowa ${tlHandler.layout.length + 1}`));
   }
 
   function handleEdit(e) {
@@ -43,7 +43,7 @@ export default function TableLayoutCard() {
             <div
               className={`tl-wrapper__item ${
                 tlHandler.approved ? "tl-wrapper__item--approved" : ""
-              }`}
+              } ${colName === "Miejsce" ? "tl-wrapper__item--special" : ""}`}
               key={i}
             >
               <input

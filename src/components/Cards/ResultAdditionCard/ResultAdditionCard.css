@@ -4,7 +4,28 @@
   position: relative;
 }
 
+.inputs-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  width: 100%;
+  gap: 16px;
+  margin-bottom: 24px;
+}
 
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-wrapper label {
+  margin: 0;
+}
+
+.input-wrapper input[type="text"] {
+  margin: 0;
+}
 
 .bg-logo {
   position: absolute;
@@ -23,5 +44,9 @@
 
   form {
     width: 100%;
+  }
+
+  .inputs-wrapper {
+    grid-template-columns: repeat(1, 1fr);
   }
 }

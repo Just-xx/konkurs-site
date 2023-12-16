@@ -12,20 +12,7 @@ export default function ConfigCard() {
       <div className="config-wrapper">
         <h1>Ustawienia</h1>
         <form className="config-form" onSubmit={(e) => e.preventDefault()}>
-          <label htmlFor="autoplace">Automatyczne miejsca <span style={{ opacity: 0.4 }}>(wymagane pole "Miejsce" i wł. sortowanie)</span></label>
-          <div className="checkbox">
-            <div className="input-checkbox">
-              <input
-                type="checkbox"
-                name="autoplace"
-                id="autoplace"
-                checked={table.autoPlace}
-                onChange={e => table.setAutoPlace(!table.autoPlace)}
-              />
-              <i className="fa-solid fa-check"></i>
-            </div>
-            <label htmlFor="autoplace">wł./wył.</label>
-          </div>
+          
           <label htmlFor="sort">Sortwanie</label>
           <div className="checkbox">
             <div className="input-checkbox">
@@ -44,13 +31,28 @@ export default function ConfigCard() {
           <select
             name="sortby"
             id="sortby"
-            value={table.sortby}
-            onChange={e => table.setSortby(e.target.value)}
+            disabled={!table.sortActive}
+            onChange={e => table.setSortby(e.target.value)} 
           >
-            {table.tableLayout.map(field => (
+            <option selected value="none">-</option>
+            {table.tableLayout.map((field, i) => !(field === "Miejsce" && table.autoPlace) && (
               <option key={field} value={field}>{field}</option>
             ))}
           </select>
+          <label htmlFor="autoplace">Automatyczne miejsca <span className="info-text">(wymagane pole "Miejsce" i wł. sortowanie)</span></label>
+          <div className={`checkbox ${!table.isAutoPlacePossible() ? "checkbox--disabled" : ""}`}>
+            <div className="input-checkbox">
+              <input
+                type="checkbox"
+                name="autoplace"
+                id="autoplace"
+                checked={table.autoPlace && table.sortActive}
+                onChange={e => table.setAutoPlace(!table.autoPlace)}
+              />
+              <i className="fa-solid fa-check"></i>
+            </div>
+            <label htmlFor="autoplace">wł./wył.</label>
+          </div>
         </form>
       </div>
     </Card>

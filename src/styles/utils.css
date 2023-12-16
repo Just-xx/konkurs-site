@@ -1,0 +1,9 @@
+span.warning-text {
+  opacity: .5;
+  color: var(--warning);
+}
+
+span.info-text {
+  opacity: .4;
+  color: #000;
+}

@@ -1,6 +1,6 @@
 import React from 'react'
 import './Card.css'
-import '../../../styles/cardForm.css'
+import '../../../styles/form.css'
 
 export default function Card({inactive, children, ...props}) {
   return (

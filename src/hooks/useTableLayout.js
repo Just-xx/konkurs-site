@@ -22,6 +22,9 @@ class TableLayoutHandler {
   }
 
   setColumnName(index, newName) {
+
+    if (this.layout.filter((a, i) => i !== parseInt(index)).indexOf(newName) + 1) return false;
+
     const newState = [...this.layout];
     newState[parseInt(index)] = newName;
     this.setLayout(newState);

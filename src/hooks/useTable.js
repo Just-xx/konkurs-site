@@ -11,9 +11,9 @@ class TableHandler {
 
     this.tableLayout = tableLayout;
 
-    const [sortActive, setSortActive] = useStateStorage("sort-active", true);
-    const [sortby, setSortby] = useStateStorage("sortby", this.tableLayout[0]);
-    const [autoPlace, setAutoPlace] = useStateStorage("auto-place", true);
+    const [sortActive, setSortActive] = useStateStorage("sort-active", false);
+    const [sortby, setSortby] = useStateStorage("sortby", "");
+    const [autoPlace, setAutoPlace] = useStateStorage("auto-place", false);
 
     this.sortActive = sortActive;
     this.setSortActive = setSortActive;
@@ -29,13 +29,26 @@ class TableHandler {
     this.#sortOnConfigUpdate();
   }
 
-  sort(state) {
-    if (state.length && this.sortActive) {
-      let newRecordsState = state.sort((a, b) => {
-        return parseInt(b[this.sortby]) - parseInt(a[this.sortby]);
-      });
+  isAutoPlacePossible() {
+    if (this.tableLayout.indexOf("Miejsce") + 1 && this.sortActive) return true;
+    return false;
+  }
 
-      if (this.autoPlace && state[0]["Miejsce"]) {
+
+  sort(state) {
+    
+    if (state.length && this.sortActive) {
+
+      let newRecordsState = state;
+
+      if (this.tableLayout.indexOf(this.sortby) + 1) {
+        newRecordsState = state.sort((a, b) => {
+          return parseInt(b[this.sortby]) - parseInt(a[this.sortby]);
+        });
+      }
+
+      if (this.autoPlace && (this.tableLayout.indexOf("Miejsce") + 1)) {
+
         newRecordsState = newRecordsState.map((record, i) => {
           record["Miejsce"] = i + 1;
           return record;
@@ -72,9 +85,18 @@ class TableHandler {
     console.info("Strona pobiera dane co 200ms, może to powodować spadek wydajności")
     return setInterval(this.recordsFetch, 200);
   }
-
+  
   addRecord(record) {
-    let newRecordsState = [...this.records, record];
+    
+    let newRecord = record;
+
+
+    if (this.autoPlace && (this.tableLayout.indexOf("Miejsce") + 1)) {
+      newRecord = {...newRecord, ["Miejsce"]: -1};
+      console.log(newRecord); 
+    }
+    
+    let newRecordsState = [...this.records, newRecord];
     const sorted = this.sort(newRecordsState);
     this.setRecords(sorted || newRecordsState);
   }

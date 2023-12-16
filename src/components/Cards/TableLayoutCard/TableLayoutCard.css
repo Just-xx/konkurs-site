@@ -76,6 +76,10 @@
   font-weight: 500;
 }
 
+.tl-wrapper__item--special {
+  border: 1px solid var(--primary-var);
+}
+
 .tl-wrapper__item__input.disabled {
   cursor: pointer;
 }

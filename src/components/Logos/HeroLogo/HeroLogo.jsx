@@ -21,9 +21,9 @@ export default function HeroLogo() {
       <AnimatePresence mode="wait">
         <HeroMotionImg key={1} src={logo} alt="" className="hero-logo-img" />
       </AnimatePresence>
-      <AnimatePresence>
+      {/* <AnimatePresence>
         <motion.span className="hero-logo-text"></motion.span>
-      </AnimatePresence>
+      </AnimatePresence> */}
     </motion.div>
   );
 }
