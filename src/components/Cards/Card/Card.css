@@ -4,6 +4,7 @@
   background-color: #F4F4F4;
   border-radius: 10px;
   margin-bottom: 48px;
+  overflow-x: auto;
 }
 
 .card.inactive {

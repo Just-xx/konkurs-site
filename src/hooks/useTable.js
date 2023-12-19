@@ -1,54 +1,50 @@
 import { useEffect } from "react";
 import { useStateStorage } from "./useStateStorage";
-import debounce from "lodash.debounce";
 
-class TableHandler {
-  constructor(tableLayout) {
-    const [records, setRecords, fetch] = useStateStorage("records", []);
-    this.records = records;
-    this.setRecords = setRecords;
-    this.recordsFetch = fetch;
+export function useTable(tlHandler) {
+  const [records, setRecords, recordsFetch] = useStateStorage("records", []);
+  const tableLayout = tlHandler.layout;
 
-    this.tableLayout = tableLayout;
+  const [sortActive, setSortActive] = useStateStorage("sort-active", true);
+  const [sortby, setSortby] = useStateStorage("sortby", "");
+  const [autoPlace, setAutoPlace] = useStateStorage("auto-place", true);
 
-    const [sortActive, setSortActive] = useStateStorage("sort-active", false);
-    const [sortby, setSortby] = useStateStorage("sortby", "");
-    const [autoPlace, setAutoPlace] = useStateStorage("auto-place", false);
-
-    this.sortActive = sortActive;
-    this.setSortActive = setSortActive;
-
-    this.sortby = sortby;
-    this.setSortby = setSortby;
-
-    this.autoPlace = autoPlace;
-    this.setAutoPlace = setAutoPlace;
-
-    this.editing = false;
-
-    this.#sortOnConfigUpdate();
-  }
-
-  isAutoPlacePossible() {
-    if (this.tableLayout.indexOf("Miejsce") + 1 && this.sortActive) return true;
-    return false;
-  }
-
-
-  sort(state) {
+  function addRecord(record) {
     
-    if (state.length && this.sortActive) {
+    const emptyRecord = Object.fromEntries(tableLayout.map((field) => [field, "-"]));
+    let newRecord = {...emptyRecord, ...record};
 
+    let newRecordsState = [...records, newRecord];
+    const sorted = sort(newRecordsState);
+    setRecords(sorted || newRecordsState);
+  }
+
+  function deleteRecord(index) {
+    const filtredRecords = records.filter((r, i) => i !== index);
+    const newRecordsState = sort(filtredRecords) || filtredRecords;
+    setRecords(newRecordsState);
+  }
+
+  function editRecord(index, fieldName, newValue) {
+    setRecords(
+      records.map((r, i) => {
+        if (i === index) r[fieldName] = newValue;
+        return r;
+      })
+    );
+  }
+
+  function sort(state) {
+    if (state.length && sortActive) {
       let newRecordsState = state;
 
-      if (this.tableLayout.indexOf(this.sortby) + 1) {
+      if (tableLayout.indexOf(sortby) + 1) {
         newRecordsState = state.sort((a, b) => {
-          return parseInt(b[this.sortby]) - parseInt(a[this.sortby]);
+          return parseInt(b[sortby]) - parseInt(a[sortby]);
         });
       }
 
-      if (this.autoPlace && (this.tableLayout.indexOf("Miejsce") + 1)) {
-
+      if (autoPlace && tableLayout.indexOf("Miejsce") + 1) {
         newRecordsState = newRecordsState.map((record, i) => {
           record["Miejsce"] = i + 1;
           return record;
@@ -57,75 +53,57 @@ class TableHandler {
 
       return newRecordsState;
     }
-    
+
     return false;
   }
 
-  sortState() {
-    const sorted = this.sort(this.records);
-    sorted && this.setRecords(sorted);
+  function trySort() {
+    const sorted = sort(records);
+    if (sorted) setRecords(sorted);
   }
 
-  #sortOnConfigUpdate() {
-    useEffect(this.sortState.bind(this), [this.sortby, this.sortActive, this.autoPlace]);
+  useEffect(trySort, [sortby, sortActive, autoPlace]);
+
+  function isAutoPlacePossible() {
+    if (tableLayout.indexOf("Miejsce") + 1 && sortActive) return true;
+    return false;
   }
 
-  clear() {
-    this.setRecords([]);
+  function clear() {
+    setRecords([]);
   }
 
-  getSortedRecordEntries(record) {
+  function getSortedRecordEntries(record) {
     return Object.entries(record).sort(
       (valA, valB) =>
-        this.tableLayout.indexOf(valA[0]) - this.tableLayout.indexOf(valB[0])
+        tableLayout.indexOf(valA[0]) - tableLayout.indexOf(valB[0])
     );
   }
 
-  getFetchInterval() {
-    console.info("Strona pobiera dane co 200ms, może to powodować spadek wydajności")
-    return setInterval(this.recordsFetch, 200);
-  }
-  
-  addRecord(record) {
-    
-    let newRecord = record;
-
-
-    if (this.autoPlace && (this.tableLayout.indexOf("Miejsce") + 1)) {
-      newRecord = {...newRecord, ["Miejsce"]: -1};
-      console.log(newRecord); 
-    }
-    
-    let newRecordsState = [...this.records, newRecord];
-    const sorted = this.sort(newRecordsState);
-    this.setRecords(sorted || newRecordsState);
-  }
-
-  deleteRecord(index) {
-    this.setRecords(this.records.filter((r, i) => i !== index));
-  }
-
-  editRecord(index, fieldName, newValue, e) {
-    this.editing = true;
-
-    this.setRecords(
-      this.records.map((r, i) => {
-        if (i === index) r[fieldName] = newValue;
-        return r;
-      })
+  function getFetchInterval() {
+    console.info(
+      "Strona pobiera dane co 200ms, może to powodować spadek wydajności"
     );
-
-    debounce(() => {
-      if (e) {
-        e.target.blur();
-      } 
-      this.editing = false;
-      this.sortState();
-    }, 5000)();
+    return setInterval(recordsFetch, 200);
   }
-}
 
-export function useTable(tlHandler) {
-  const tableHandler = new TableHandler(tlHandler.layout);
-  return tableHandler;
+  return {
+    records,
+    addRecord,
+    deleteRecord,
+    editRecord,
+    getSortedRecordEntries,
+    fetch,
+    getFetchInterval,
+    clear,
+    isAutoPlacePossible,
+    trySort,
+    sortActive,
+    setSortActive,
+    sortby,
+    setSortby,
+    autoPlace,
+    setAutoPlace,
+    tableLayout
+  };
 }

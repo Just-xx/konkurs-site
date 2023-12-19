@@ -1,53 +1,42 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-class StateStorageHandler {
-  constructor(LSname, initVal) {
-    const [state, setState] = useState(initVal);
-    this.state = state;
-    this.setState = setState;
-    this.LSname = LSname;
-    this.initVal = initVal;
+function checkInStorage(initVal, lsname, setState) {
+  const res = localStorage.getItem(lsname);
 
-    this.#checkInStorageEffect();
-    this.#updateLS();
-  }
-
-  checkInStorage() {
-    const res = localStorage.getItem(this.LSname);
-
-    if (res) {
-      switch (typeof this.initVal) {
-        case "object":
-          this.setState(JSON.parse(res));
-          break;
-        case "number":
-          this.setState(parseFloat(res));
-          break;
-        case "string":
-          this.setState(JSON.parse(res));
-          break;
-        case "boolean":
-          this.setState(res === "true" ? true : false);
-          break;
-      }
-      return;
+  if (res) {
+    switch (typeof initVal) {
+      case "object":
+        setState(JSON.parse(res));
+        break;
+      case "number":
+        setState(parseFloat(res));
+        break;
+      case "string":
+        setState(JSON.parse(res));
+        break;
+      case "boolean":
+        setState(res === "true" ? true : false);
+        break;
     }
-
-    this.setState(this.initVal);
+    return;
   }
 
-  #checkInStorageEffect() {
-    useEffect(this.checkInStorage.bind(this), []);
-  }
-
-  #updateLS() {
-    useEffect(() => {
-      localStorage.setItem(this.LSname, JSON.stringify(this.state));
-    }, [this.state]);
-  }
+  setState(initVal);
 }
 
-export function useStateStorage(LSname, initVal) {
-  const stateStorageHandler = new StateStorageHandler(LSname, initVal);
-  return [stateStorageHandler.state, stateStorageHandler.setState, stateStorageHandler.checkInStorage.bind(stateStorageHandler)];
+export function useStateStorage(lsname, initVal) {
+
+  const [state, setState] = useState(initVal);
+
+  useEffect(() => {
+    checkInStorage(initVal, lsname, setState)
+  }, []);
+
+  useEffect(() => {
+    if (state !== initVal) {
+      localStorage.setItem(lsname, JSON.stringify(state));
+    }
+  }, [state]);
+
+  return [state, setState, () => checkInStorage(initVal, lsname, setState)];
 }

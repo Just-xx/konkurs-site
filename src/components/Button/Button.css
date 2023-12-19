@@ -13,6 +13,7 @@
   align-items: center;
   margin: 0;
   text-wrap: nowrap;
+  overflow: hidden;
 }
 
 .btn:hover {
@@ -45,4 +46,10 @@
 
 .center {
   text-align: center;
+}
+
+.btn--inactive {
+  opacity: .2;
+  pointer-events: none;
+  user-select: none;
 }

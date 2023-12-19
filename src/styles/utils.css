@@ -6,4 +6,6 @@ span.warning-text {
 span.info-text {
   opacity: .4;
   color: #000;
+  font-size: .8em;
+  font-weight: 400;
 }

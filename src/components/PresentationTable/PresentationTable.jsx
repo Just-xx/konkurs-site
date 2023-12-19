@@ -3,11 +3,11 @@ import "./PresentationTable.css";
 import { useContext } from "react";
 import { useEffect } from "react";
 import { TableContext } from "../../contexts/TableContext";
-import { TLContext } from "../../contexts/TLContext";
+import { getBadge } from "../../utils/getBadge";
 
 export default function PresentationTable() {
+  
   const table = useContext(TableContext);
-  const tlHandler = useContext(TLContext);
 
   useEffect(() => {
     const fetchInterval = table.getFetchInterval();
@@ -27,7 +27,13 @@ export default function PresentationTable() {
         {table.records.map((record, i) => (
           <tr key={i}>
             {table.getSortedRecordEntries(record).map(field => (
-              <td key={field[0]}>{field[1]}</td>
+              <React.Fragment key={field[0]}>
+                {field[0] === "Miejsce" && field[1] <= 3 ? (
+                  <td className="badge">{getBadge(field[1])}</td>
+                ) : (
+                  <td>{field[1]}</td>
+                )}
+              </React.Fragment>
             ))}
           </tr>
         ))}

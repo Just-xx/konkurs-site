@@ -78,6 +78,7 @@
 
 .tl-wrapper__item--special {
   border: 1px solid var(--primary-var);
+  background-color: rgba(209, 166, 166, 0.1);
 }
 
 .tl-wrapper__item__input.disabled {

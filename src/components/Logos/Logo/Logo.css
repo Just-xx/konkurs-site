@@ -5,14 +5,16 @@
   cursor: default;
   user-select: none;
   transition: transform 400ms cubic-bezier(.47,1.64,.41,.8);
-  visibility: hidden;
+  padding: 8px;
+  background-color: rgba(184, 74, 74, 0.1);
+  border-radius: 5px;
 }
 
 
 .logo-img  {
-  height: 50px;
-  border-radius: 8px;
+  font-size: 2rem;
   opacity: .8;
+  color: var(--primary);
 }
 
 .logo:hover {
@@ -24,7 +26,7 @@
 }
 
 .logo-text {
-  font-size: .7rem;
+  font-size: .8rem;
   font-weight: 600;
   color: var(--primary);
   text-wrap: nowrap;

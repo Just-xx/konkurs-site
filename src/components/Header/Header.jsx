@@ -1,21 +1,25 @@
-import React from 'react'
-import './Header.css'
-import Logo from '../Logos/Logo/Logo'
-import Button from '../Button/Button'
-import { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import "./Header.css";
+import Logo from "../Logos/Logo/Logo";
+import { Link } from "react-router-dom";
+import Button from "../Button/Button";
 
 export default function Header() {
-
-
   return (
     <header>
-        <Link className='navlink' to="prezentacja" target="_blank" rel="noopener noreferrer" ><span>Przejdź do wyników</span><i className="fa-solid fa-up-right-from-square"></i></Link>
-      {/* <Logo /> */}
-      {/* <nav> */}
-        {/* <button onClick={() => fileDownload(CSVData)} className="navlink">Eksportuj wyniki</button> */}
-        {/* <Button fileInput onChange={e => handleCSVFile(e, setCSVData)}>Załaduj z pliku</Button> */}
-      {/* </nav> */}
+      <Logo />
+      <nav>
+        <Link
+          className="navlink"
+          to="prezentacja"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>Przejdź do wyników</span>
+          <i className="fa-solid fa-up-right-from-square"></i>
+        </Link>
+        <button disabled className="navlink btn--inactive">Eksportuj wyniki</button>
+        <Button inactive fileInput>Załaduj z pliku</Button>
+      </nav>
     </header>
-  )
+  );
 }

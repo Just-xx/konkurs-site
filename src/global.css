@@ -35,7 +35,7 @@ body, #root {
   justify-content: start;
 }
 
-@media screen and (max-width: 635px) {
+@media screen and (max-width: 720px) {
   html, body {
     font-size: 12px;
   }

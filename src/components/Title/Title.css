@@ -1,0 +1,12 @@
+.title {
+  font-size: 1.58rem;
+  font-weight: 600;
+  color: #000;
+  margin: 0;
+  margin-bottom: 32px;
+}
+
+.title--center {
+  text-align: center;
+  width: 100%;
+}

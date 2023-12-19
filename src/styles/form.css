@@ -6,7 +6,6 @@ form {
 }
 
 form input[type="text"], select {
-  margin-bottom: 24px;
   padding: 12px 24px;
   font-size: 1rem;
   border-radius: 10px;
@@ -55,7 +54,6 @@ input[type="range"]::-moz-range-thumb {
 .checkbox {
   display: flex;
   align-items: center;
-  margin-bottom: 24px;
 }
 
 .checkbox.checkbox--disabled {

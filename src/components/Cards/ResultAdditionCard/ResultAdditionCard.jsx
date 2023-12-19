@@ -1,4 +1,3 @@
-import React from "react";
 import Card from "../Card/Card";
 import "./ResultAdditionCard.css";
 import Button from "../../Button/Button";
@@ -19,7 +18,6 @@ export default function ResultAdditionCard() {
   }
 
   const handleResultAddition = e => {
-
     clearRefs();
     e.preventDefault();
 
@@ -31,7 +29,6 @@ export default function ResultAdditionCard() {
       record = { ...record, [field]: val };
     });
 
-
     table.addRecord(record);
   };
 
@@ -41,17 +38,20 @@ export default function ResultAdditionCard() {
         <h1>Dodaj nowy wynik</h1>
         <form onSubmit={handleResultAddition}>
           <div className="inputs-wrapper">
-            {tlHandler.layout.map((field, i) => !(field === "Miejsce" && table.autoPlace) && (
-              <div className="input-wrapper" key={field}>
-                <label htmlFor={field}>{field}</label>
-                <input
-                  type="text"
-                  id={field}
-                  data-field={field}
-                  ref={e => (inputRefs.current[field] = e)}
-                />
-              </div>
-            ))}
+            {tlHandler.layout.map(
+              field =>
+                !(field === "Miejsce" && table.autoPlace && table.isAutoPlacePossible()) && (
+                  <div className="input-wrapper" key={field}>
+                    <label htmlFor={field}>{field}</label>
+                    <input
+                      type="text"
+                      id={field}
+                      data-field={field}
+                      ref={e => (inputRefs.current[field] = e)}
+                    />
+                  </div>
+                )
+            )}
           </div>
           <Button onClick={handleResultAddition} secondary>
             Dodaj<i className="fa-solid fa-circle-plus"></i>
