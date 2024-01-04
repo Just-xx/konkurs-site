@@ -1,15 +1,16 @@
-import './Title.css'
 import PropTypes from 'prop-types'
+import { H1 } from './Title.style'
 
-export default function Title({ children, center }) {
+export default function Title({ children, center, sm }) {
   return (
-    <h1 className={`title ${center ? "title--center" : ""}`}>
+    <H1 $center={center} $sm={sm} as={sm ? 'h2' : undefined}>
       {children}
-    </h1>
+    </H1>
   )
 }
 
 Title.propTypes = {
   children: PropTypes.node.isRequired,
   center: PropTypes.bool,
+  sm: PropTypes.bool,
 }

@@ -1,25 +1,22 @@
-import "./Header.css";
-import Logo from "../Logos/Logo/Logo";
-import { Link } from "react-router-dom";
+import Logo from "../Logo/Logo";
 import Button from "../Button/Button";
+import { HeaderContainer, LogoContainer, SidebarIcon } from './Header.style'
+import PropTypes from 'prop-types'
 
-export default function Header() {
+export default function Header({ hideNav }) {
   return (
-    <header>
-      <Logo />
+    <HeaderContainer>
+      <LogoContainer>
+        {!hideNav && <SidebarIcon className="fa-solid fa-bars-staggered"></SidebarIcon>}
+        <Logo />
+      </LogoContainer>
       <nav>
-        <Link
-          className="navlink"
-          to="prezentacja"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span>Przejdź do wyników</span>
-          <i className="fa-solid fa-up-right-from-square"></i>
-        </Link>
-        <button disabled className="navlink btn--inactive">Eksportuj wyniki</button>
-        <Button inactive fileInput>Załaduj z pliku</Button>
+      {!hideNav && <Button to="/prezentacja" secondary>Prezentacja wyników</Button>}
       </nav>
-    </header>
+    </HeaderContainer>
   );
+}
+
+Header.propTypes = {
+  hideNav: PropTypes.bool
 }

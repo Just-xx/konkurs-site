@@ -1,27 +1,39 @@
-import './Button.css';
+
 import PropTypes from 'prop-types';
+import { ButtonContainer, IconButtonContainer, LinkButtonContainer, LinkIcon, IconButtonI } from './Button.style';
 
-export default function Button({ children, secondary, fileInput, allWidth, center, inactive, ...props}) {
-
+export default function Button({ children, secondary, to, noIcon, ...props}) {
+  if (to) {
+    return (
+      <LinkButtonContainer $secondary={secondary} to={to} {...props}>
+        {children}
+        {!noIcon && <LinkIcon className="fa-solid fa-up-right-from-square"></LinkIcon>}
+      </LinkButtonContainer>
+    )
+  }
 
   return (
-    <>
-      { fileInput ? 
-          <>
-            <input type="file" name="file" id="file-uload" className={`file-upload ${secondary ? 'btn-secondary' : ''}`}  {...props}/>
-            <label className={`btn ${inactive ? 'btn--inactive' : ''}`} htmlFor="file-uload">{children}</label>
-          </> :
-          <button className={`btn  ${inactive ? 'btn--inactive' : ''} ${secondary ? 'btn-secondary' : ''} ${allWidth ? 'all-width' : ''} ${center ? 'center' : ''}`} {...props}>{children}</button>
-      }
-    </>
+    <ButtonContainer $secondary={secondary} {...props}>
+      {children}
+    </ButtonContainer>
   )
+}
+
+export function IconButton({ icon, ...props}) {
+  return (
+    <IconButtonContainer {...props}>
+      <IconButtonI className={icon}></IconButtonI>
+    </IconButtonContainer>
+  )
+}
+
+IconButton.propTypes = {
+  icon: PropTypes.string.isRequired,
 }
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
   secondary: PropTypes.bool,
-  fileInput: PropTypes.bool,
-  allWidth: PropTypes.bool,
-  center: PropTypes.bool,
-  inactive: PropTypes.bool,
+  to: PropTypes.string,
+  noIcon: PropTypes.bool,
 }
