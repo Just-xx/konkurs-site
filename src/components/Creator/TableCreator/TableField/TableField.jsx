@@ -2,7 +2,7 @@ import { TableFieldContainer, TableFieldBadge, TableFieldName, RemoveButton, Fun
 import PropTypes from 'prop-types'
 import { useState, useContext } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { TableCreatorContext } from '../../../contexts/TableCreatorContext';
+import { TableCreatorContext } from '../../../../contexts/TableCreatorContext';
 
 export default function TableField({ type, name, id }) {
   

@@ -1,12 +1,21 @@
 import { lighten } from 'polished';
 import styled, { css } from 'styled-components';
 
+export const InactiveStyle = css`
+  opacity: .5;
+  cursor: auto;
+  pointer-events: none;
+  user-select: none;
+`;
+
 export const InputWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: stretch;
   flex-direction: column;
   width: ${({ $short }) => $short ? "auto" : "100%"};
+
+  ${({ $inactive }) => $inactive && InactiveStyle};
 `;
 
 export const StyledTextInput = styled.input`
@@ -95,4 +104,19 @@ export const ToggleCircle = styled.div`
   will-change: transform, background-color, left;
 
   ${({ $checked }) => $checked && ToggleCircleCheckedStyles}
+`;
+
+export const FileInputLabel = styled.label`
+  padding: 12px ${({ theme }) => theme.spacings.lg};
+  background-color: transparent;
+  border: 1px solid ${({ theme }) => theme.colors.primary};
+  border-radius: 10px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.primary};
+  font-size: ${({ theme }) => theme.font.sizes.md};
+  cursor: pointer;
+`;
+
+export const FileInputEl = styled.input`
+  display: none;
 `;

@@ -1,18 +1,18 @@
-import Modal from "../../Modal/Modal";
-import TextInput from "../../Inputs/TextInput";
-import Select from "../../Inputs/Select";
-import { FIELD_TYPES } from "../../../constants/FIELD_TYPES";
-import PropTypes from 'prop-types'
+import Modal from "../../../Modal/Modal";
+import TextInput from "../../../Inputs/TextInput";
+import Select from "../../../Inputs/Select";
+import { FIELD_TYPES } from "../../../../constants/FIELD_TYPES";
+import PropTypes from "prop-types";
 import { useState, useContext } from "react";
-import { TableCreatorContext } from "../../../contexts/TableCreatorContext";
-import styled from 'styled-components';
+import { TableCreatorContext } from "../../../../contexts/TableCreatorContext";
+import styled from "styled-components";
+import { toast } from "react-toastify";
 
 let fieldOtions = Object.values(FIELD_TYPES).map(type => ({
   ...type,
   label: type.text,
   value: type.name,
 }));
-
 
 export const ModalInputsWrapper = styled.div`
   display: flex;
@@ -26,7 +26,6 @@ export const ModalInputsWrapper = styled.div`
 `;
 
 export default function AddtionModal({ visible, close }) {
-  
   const tableCreator = useContext(TableCreatorContext);
 
   const [fieldType, setFieldType] = useState(fieldOtions[0]);
@@ -34,16 +33,16 @@ export default function AddtionModal({ visible, close }) {
   const [fieldFormula, setFieldFormula] = useState("");
 
   function handleSubmition() {
-    if (fieldName.length === 0) return false;
+    if (fieldName.length === 0) {
+      return toast.error("Musisz podać nazwę pola!");
+    }
 
-    if (
-      fieldType.value === FIELD_TYPES.FORMULA.name &&
-      fieldFormula.length === 0
-    )
-      return false;
+    if (fieldType.value === FIELD_TYPES.FORMULA.name && fieldFormula.length === 0) {
+      return toast.error("Wszystkie pola muszą być wypełnione!");
+    }
 
     const finalFieldType = Object.values(FIELD_TYPES).find(type => type.name === fieldType.value);
-    
+
     tableCreator.addField(finalFieldType, fieldName);
     close();
   }
@@ -60,20 +59,13 @@ export default function AddtionModal({ visible, close }) {
         />
         {FIELD_TYPES.FORMULA.name === fieldType.value && (
           <TextInput
-            onChange={e => setFieldFormula(e.target.value)}
-            value={fieldFormula}
+            state={[fieldFormula, setFieldFormula]}
             label="Formuła"
             labelId="formula"
             placeholder="np. {Wynik}-{Punkty}"
           />
         )}
-        <TextInput
-          onChange={e => setFieldName(e.target.value)}
-          value={fieldName}
-          label="Nazwa"
-          labelId="nazwa"
-          placeholder="np. Wynik"
-        />
+        <TextInput state={[fieldName, setFieldName]} label="Nazwa" labelId="nazwa" placeholder="np. Wynik" />
       </ModalInputsWrapper>
     </Modal>
   );
@@ -81,5 +73,5 @@ export default function AddtionModal({ visible, close }) {
 
 AddtionModal.propTypes = {
   visible: PropTypes.bool,
-  close: PropTypes.func
+  close: PropTypes.func,
 };

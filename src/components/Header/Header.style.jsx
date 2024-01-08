@@ -11,7 +11,7 @@ export const HeaderContainer = styled.header`
 
 export const SidebarIcon = styled.i`
   font-size: ${({ theme }) => theme.font.sizes.xl};
-  color: ${({ theme }) => theme.colors.text};
+  color: ${({ theme }) => theme.colors.textLight};
   border-radius: 5px;
   padding: ${({ theme }) => theme.spacings.sm};
   cursor: pointer;

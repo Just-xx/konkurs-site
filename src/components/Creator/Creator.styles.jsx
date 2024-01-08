@@ -9,11 +9,3 @@ export const TableCreatorContainer = styled.div`
   width: 100%;
   margin-bottom: ${({ theme }) => theme.spacings.xxl};
 `;
-
-export const TableFieldsWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  gap: ${({ theme }) => theme.spacings.md};
-`;

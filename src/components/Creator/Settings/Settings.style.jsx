@@ -59,3 +59,11 @@ export const ExpandIcon = styled.i`
 
   ${({ $expanded }) => $expanded && ExpandedIconStyles}
 `;
+
+export const ChoiceText = styled.span`
+  display: block;
+  align-self: flex-end;
+  font-size: ${({ theme }) => theme.font.sizes.md};
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.textLight};
+`;

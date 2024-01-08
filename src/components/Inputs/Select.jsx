@@ -4,9 +4,9 @@ import ReactSelect from "react-select";
 import { lighten } from "polished";
 import { theme } from "../../theme";
 
-export default function Select({ label, labelId, options, labelSec, short, ...props }) {
+export default function Select({ label, inactive, labelId, options, labelSec, short, ...props }) {
   return (
-    <InputWrapper $short={short}>
+    <InputWrapper $inactive={inactive} $short={short}>
       <Label $secondary={labelSec} htmlFor={labelId}>{label}</Label>
       <ReactSelect
         styles={{
@@ -56,4 +56,5 @@ Select.propTypes = {
   options: PropTypes.array.isRequired,
   labelSec: PropTypes.bool,
   short: PropTypes.bool,
+  inactive: PropTypes.bool,
 };

@@ -1,22 +1,15 @@
 import { InputWrapper, Label, ToggleCircle, ToggleWrapper } from './Inputs.style'
 import PropTypes from 'prop-types'
-import { useEffect, useState } from 'react'
 
-export default function Toggle({ labelId, label, state }) {
+export default function Toggle({ inactive, labelId, label, state }) {
   
-  const [checked, setChecked] = useState(false)
-
-  useEffect(() => {
-    state[1](checked)
-  }, [checked])
-
   return (
-    <InputWrapper $short>
+    <InputWrapper $inactive={inactive} $short>
       <Label $secondary htmlFor={labelId}>{label}</Label>
-      <ToggleWrapper tabIndex="1" htmlFor={labelId} $checked={checked} onClick={() => setChecked(!checked)}>
-        <ToggleCircle $checked={checked} />
+      <ToggleWrapper tabIndex="1" htmlFor={labelId} $checked={state[0]} onClick={() => state[1](!state[0])}>
+        <ToggleCircle $checked={state[0]} />
       </ToggleWrapper>
-      <input type="checkbox" style={{ display: "none" }} name={labelId} value={checked} />  
+      <input type="checkbox" style={{ display: "none" }} name={labelId} value={state[0]} />  
     </InputWrapper>
   )
 }
@@ -25,4 +18,5 @@ Toggle.propTypes = {
   labelId: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   state: PropTypes.array.isRequired,
+  inactive: PropTypes.bool,
 }
